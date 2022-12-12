@@ -1,7 +1,8 @@
 import { ProtectRoute } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserAuthContextProvider from "./context/userAuthContext";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
+import Loading from "./components/Loading";
 
 const Login = lazy(() => import("./pages/Login"));
 const Home = lazy(() => import("./pages/Home"));
@@ -14,17 +15,41 @@ function App() {
       <Router>
         <UserAuthContextProvider>
           <Routes>
-            <Route path="/" element={<Welcome />} />
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Welcome />
+                </Suspense>
+              }
+            />
+
             <Route
               path="/home"
               element={
                 <ProtectRoute>
-                  <Home />
+                  <Suspense fallback={<Loading />}>
+                    <Home />
+                  </Suspense>
                 </ProtectRoute>
               }
             />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/login"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Login />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Signup />
+                </Suspense>
+              }
+            />
           </Routes>
         </UserAuthContextProvider>
       </Router>

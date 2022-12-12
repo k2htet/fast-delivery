@@ -21,6 +21,7 @@ const Welcome = () => {
         <img
           src={welcomeDeli}
           className="max-w-[250px] sm:max-w-sm md:max-w-sm lg:max-w-md xl:max-w-lg h-auto object-cover"
+          alt="welcome"
         />
         <div>
           <h1 className="text-center sm:text-left md:text-center lg:text-left text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
